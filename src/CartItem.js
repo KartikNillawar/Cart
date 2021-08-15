@@ -12,7 +12,34 @@ class CartItem extends React.Component{
         //this.increaseQuantity = this.increaseQuantity.bind(this);
     }
     increaseQuantity = () =>{
-        console.log('this',this.state);
+        //console.log('this',this.state)
+        //this.state.qty +=1;
+        //calling the set state we can trigger the rerender the function of our compnonent.
+        //setstate form 1
+        //this.setState({
+        //    qty: this.state.qty + 1
+        //})
+        //we can use state form 1 one when we just want to change the title for ex.
+        //we can use state form 2 one when we want to change the increase decrease for ex.
+        //set state form 2
+       this.setState((prevState) => {
+           return {
+               qty: prevState.qty + 1,
+           }
+       });
+    }
+    decreaseQuantity = () =>{
+        const { qty } = this.state;
+         
+        if(qty == 0){
+            return ;
+        }
+        //set state form 2 when prevstate required use this
+       this.setState((prevState) => {
+           return {
+               qty: prevState.qty - 1,
+           }
+       });
     }
     render(){
         const{ price,title,qty } =this.state;
@@ -34,7 +61,7 @@ class CartItem extends React.Component{
                         <img 
                         alt="decrease" 
                         className="action-icons" 
-                        src="https://image.flaticon.com/icons/png/512/992/992683.png">
+                        src="https://image.flaticon.com/icons/png/512/992/992683.png" onClick={this.decreaseQuantity}>
                         </img>
                         <img 
                         alt="delete" 
